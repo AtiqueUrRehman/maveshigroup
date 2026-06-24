@@ -23,7 +23,7 @@ export default function Footer({ brand, tagline, copyright }: FooterProps) {
     >
       <div
         style={{ maxWidth: 1240 }}
-        className="mx-auto px-7 py-8 flex items-center justify-between gap-6"
+        className="mx-auto px-7 py-8 flex flex-col sm:flex-row items-center sm:justify-between gap-4 sm:gap-6 text-center sm:text-left"
       >
         <Link href="/" className="flex items-center gap-3 no-underline">
           {brand === "maveshi" && (
