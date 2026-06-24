@@ -11,8 +11,8 @@ interface NavLink {
 
 interface NavProps {
   brand: "maveshi" | "alpha";
-  ctaLabel: string;
-  ctaHref: string;
+  ctaLabel?: string;
+  ctaHref?: string;
   links: NavLink[];
 }
 
@@ -32,7 +32,7 @@ export default function Nav({ brand, ctaLabel, ctaHref, links }: NavProps) {
       className="mx-auto px-7 py-[22px] flex items-center justify-between gap-6"
     >
       {/* Logo + wordmark */}
-      <Link href="/" className="flex items-center gap-3 no-underline">
+      <Link href={brand === "alpha" ? "/alpha-farms" : "/"} className="flex items-center gap-3 no-underline">
         {brand === "maveshi" && (
           <Image
             src="/assets/maveshi-logo.png"
@@ -58,7 +58,21 @@ export default function Nav({ brand, ctaLabel, ctaHref, links }: NavProps) {
         </div>
       </Link>
 
-      {/* Center links */}
+      {/* Back link — mobile only (faint links) */}
+      <div className="flex lg:hidden items-center">
+        {links.filter((l) => l.faint).map((link) => (
+          <Link
+            key={link.label}
+            href={link.href}
+            className="no-underline text-[13px] font-medium"
+            style={{ color: "#8a857d" }}
+          >
+            {link.label}
+          </Link>
+        ))}
+      </div>
+
+      {/* Center links — desktop */}
       <div className="hidden lg:flex items-center gap-[34px]">
         {links.map((link) => (
           <Link
@@ -73,30 +87,32 @@ export default function Nav({ brand, ctaLabel, ctaHref, links }: NavProps) {
       </div>
 
       {/* CTA */}
-      <Link
-        href={ctaHref}
-        className="inline-flex items-center gap-2 font-semibold text-[13px] lg:text-[14px] text-white px-[14px] py-[11px] lg:px-[22px] lg:py-[13px] rounded-xl no-underline transition-all duration-250 ease-out"
-        style={{
-          background: brandColor,
-          boxShadow: brandShadow,
-        }}
-        onMouseEnter={(e) => {
-          const el = e.currentTarget as HTMLAnchorElement;
-          el.style.background = brand === "alpha" ? "#1e4227" : "#A82C22";
-          el.style.transform = "translateY(-2px)";
-          el.style.boxShadow = brand === "alpha"
-            ? "0 12px 26px rgba(42,92,53,0.3)"
-            : "0 12px 26px rgba(197,55,44,0.3)";
-        }}
-        onMouseLeave={(e) => {
-          const el = e.currentTarget as HTMLAnchorElement;
-          el.style.background = brandColor;
-          el.style.transform = "translateY(0)";
-          el.style.boxShadow = brandShadow;
-        }}
-      >
-        {ctaLabel} <span className="text-base">→</span>
-      </Link>
+      {ctaLabel && ctaHref && (
+        <Link
+          href={ctaHref}
+          className="inline-flex items-center gap-2 font-semibold text-[13px] lg:text-[14px] text-white px-[14px] py-[11px] lg:px-[22px] lg:py-[13px] rounded-xl no-underline transition-all duration-250 ease-out"
+          style={{
+            background: brandColor,
+            boxShadow: brandShadow,
+          }}
+          onMouseEnter={(e) => {
+            const el = e.currentTarget as HTMLAnchorElement;
+            el.style.background = brand === "alpha" ? "#1e4227" : "#A82C22";
+            el.style.transform = "translateY(-2px)";
+            el.style.boxShadow = brand === "alpha"
+              ? "0 12px 26px rgba(42,92,53,0.3)"
+              : "0 12px 26px rgba(197,55,44,0.3)";
+          }}
+          onMouseLeave={(e) => {
+            const el = e.currentTarget as HTMLAnchorElement;
+            el.style.background = brandColor;
+            el.style.transform = "translateY(0)";
+            el.style.boxShadow = brandShadow;
+          }}
+        >
+          {ctaLabel} <span className="text-base">→</span>
+        </Link>
+      )}
     </nav>
   );
 }

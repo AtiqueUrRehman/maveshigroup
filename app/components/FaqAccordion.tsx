@@ -10,7 +10,7 @@ interface FaqItem {
 const faqs: FaqItem[] = [
   {
     question: "What does the monthly care fee cover?",
-    answer: "The monthly care fee (Rs 12,000–15,000) covers full feed, veterinary check-ups, grooming, and housing at our farm. You receive monthly photo and video updates of your goat so you can follow its progress.",
+    answer: "The monthly care fee (Rs 11,000–14,000) covers full feed, veterinary check-ups, grooming, and housing at our farm. You receive monthly photo and video updates of your goat so you can follow its progress.",
   },
   {
     question: "What happens if the goat gets sick or passes away?",

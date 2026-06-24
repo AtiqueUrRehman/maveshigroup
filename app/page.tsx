@@ -29,7 +29,7 @@ const ecosystemCards = [
     index: "03",
     title: "Burraq Dairies",
     description: "Fresh, traceable milk delivered directly from our herd to your home.",
-    href: "#",
+    href: "/burraq-dairies",
     img: "/assets/card-burraq.jpg",
     imgAlt: "Burraq Dairies",
     imgPosition: "60% 45%",
@@ -46,16 +46,16 @@ const timelineSteps = [
 ];
 
 const stats = [
-  { value: "10,000+", label: "Animals Raised" },
-  { value: "50,000+", label: "Liters of Milk Delivered" },
-  { value: "5,000+", label: "Happy Families" },
-  { value: "5+", label: "Years of Breeding Excellence" },
+  { value: "500+", label: "Animals Raised" },
+  { value: "6,000+", label: "Liters of Goat Milk Delivered" },
+  { value: "200+", label: "Happy Families" },
+  { value: "6+", label: "Years of Breeding Excellence" },
 ];
 
 const businessChips = [
   { initial: "M", name: "Maveshi Farms", href: "#" },
   { initial: "A", name: "Alpha Farms", href: "/alpha-farms" },
-  { initial: "B", name: "Burraq Dairies", href: "#" },
+  { initial: "B", name: "Burraq Dairies", href: "/burraq-dairies" },
 ];
 
 export default function Home() {
@@ -100,7 +100,7 @@ export default function Home() {
 
           <HeroParallax>
             <div
-              className="relative overflow-hidden h-[300px] lg:h-[560px] rounded-[20px] lg:rounded-[24px]"
+              className="relative overflow-hidden aspect-[3/4] sm:aspect-auto sm:h-[380px] lg:h-[560px] rounded-[20px] lg:rounded-[24px]"
               style={{ boxShadow: "0 30px 70px rgba(30,25,18,0.16)" }}
             >
               <Image
@@ -109,6 +109,7 @@ export default function Home() {
                 fill
                 sizes="(max-width: 768px) calc(100vw - 56px), (max-width: 1240px) 55vw, 680px"
                 className="object-cover"
+                style={{ objectPosition: "50% 30%" }}
                 priority
               />
             </div>
@@ -118,7 +119,7 @@ export default function Home() {
 
       <main style={{ maxWidth: 1240 }} className="mx-auto px-7 pt-9 pb-16 flex flex-col gap-[26px]">
 
-        {/* JOURNEY TIMELINE */}
+        {/* ORIGIN STORY */}
         <RevealSection
           className="p-8 lg:pt-[54px] lg:px-[56px] lg:pb-[60px]"
           style={{ background: "#F4F2EE", borderRadius: 28 }}
@@ -127,35 +128,17 @@ export default function Home() {
             IT STARTED WITH A QUESTION.
           </div>
           <h2
-            className="font-bold leading-[1.18] m-0 mb-[52px]"
-            style={{ fontSize: "clamp(26px,2.6vw,34px)", letterSpacing: "-0.02em", maxWidth: 520 }}
+            className="font-bold leading-[1.18] m-0 mb-[22px]"
+            style={{ fontSize: "clamp(26px,2.6vw,34px)", letterSpacing: "-0.02em", maxWidth: 640 }}
           >
-            Why is livestock management still stuck in the past?
+            Why is the Goat Farming industry in Pakistan still stuck in the past?
           </h2>
-
-          <div className="overflow-x-auto -mx-2 px-2">
-          <div className="relative">
-            <div
-              className="absolute top-[23px] h-[2px] rounded-sm"
-              style={{ left: "calc(100%/12)", right: "calc(100%/12)", background: "#C5372C" }}
-            />
-            <div className="relative grid" style={{ gridTemplateColumns: "repeat(6,1fr)", minWidth: 560 }}>
-              {timelineSteps.map((step) => (
-                <div key={step.num} className="flex flex-col items-center gap-3">
-                  <div
-                    className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-[13px] z-10"
-                    style={{ border: "2px solid #C5372C", background: "#FBFAF8", color: "#C5372C" }}
-                  >
-                    {step.num}
-                  </div>
-                  <span className="text-[13px] font-medium text-center leading-[1.3]" style={{ color: "#6b665c" }}>
-                    {step.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-          </div>
+          <p
+            className="m-0 leading-[1.7]"
+            style={{ fontSize: "clamp(16px,1.4vw,18px)", color: "#6b665c", maxWidth: 680 }}
+          >
+            The deeper I looked, the clearer it became — sustainable growth in this industry required data-driven, structured approaches that could augment existing practices: not just to build a viable business, but to contribute meaningfully to the sector itself.
+          </p>
         </RevealSection>
 
         {/* ECOSYSTEM */}
@@ -187,7 +170,7 @@ export default function Home() {
                 }}
               >
                 <div className="grid grid-cols-1 sm:grid-cols-[0.9fr_1.1fr]">
-                  <div className="relative overflow-hidden h-[200px] sm:h-auto sm:min-h-[220px]">
+                  <div className="relative overflow-hidden h-[260px] sm:h-auto sm:min-h-[220px]">
                     <Image
                       src={card.img}
                       alt={card.imgAlt}
@@ -236,15 +219,22 @@ export default function Home() {
                 className="m-0 font-bold leading-[1.32]"
                 style={{ fontSize: "clamp(22px,2.2vw,28px)", letterSpacing: "-0.015em" }}
               >
-                I built software systems that scaled to millions of users. Then I asked: why can&apos;t a farmer know the health of his herd in real time?
+                They said a Computer Science major had no business raising goats. I thought: that&apos;s exactly the problem.
               </blockquote>
             </div>
 
             <div
-              className="mx-auto flex items-center justify-center text-[13px] font-medium"
-              style={{ width: 230, height: 280, borderRadius: 20, background: "#E8E4DE", color: "#a8a298" }}
+              className="mx-auto relative overflow-hidden flex-shrink-0"
+              style={{ width: 230, height: 310, borderRadius: 20 }}
             >
-              Founder portrait
+              <Image
+                src="/assets/founder.jpg"
+                alt="Atique, Founder of Maveshi Farms"
+                fill
+                className="object-cover"
+                style={{ objectPosition: "60% 20%" }}
+                sizes="230px"
+              />
             </div>
 
             <div className="flex flex-col gap-4">
