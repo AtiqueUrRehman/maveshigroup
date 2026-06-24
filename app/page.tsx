@@ -1,65 +1,338 @@
 import Image from "next/image";
+import Link from "next/link";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
+import RevealSection from "./components/RevealSection";
+import StatCounter from "./components/StatCounter";
+import HeroParallax from "./components/HeroParallax";
+
+const ecosystemCards = [
+  {
+    index: "01",
+    title: "Maveshi Farms",
+    description: "The parent operation — ethical goat breeding, milk production, and livestock management built on software-first thinking.",
+    href: "#",
+    img: "/assets/card-maveshi.jpg",
+    imgAlt: "Maveshi Farms",
+    imgPosition: "50% 40%",
+  },
+  {
+    index: "02",
+    title: "Alpha Farms",
+    description: "Reserve your Qurbani goat by video. We raise it, care for it, and deliver it before Eid.",
+    href: "/alpha-farms",
+    img: "/assets/card-alpha.jpg",
+    imgAlt: "Alpha Farms — Qurbani goat reservation",
+    imgPosition: "50% 50%",
+  },
+  {
+    index: "03",
+    title: "Burraq Dairies",
+    description: "Fresh, traceable milk delivered directly from our herd to your home.",
+    href: "#",
+    img: "/assets/card-burraq.jpg",
+    imgAlt: "Burraq Dairies",
+    imgPosition: "60% 45%",
+  },
+];
+
+const timelineSteps = [
+  { num: "01", label: "Software Engineer" },
+  { num: "02", label: "Researching Livestock" },
+  { num: "03", label: "First Goats" },
+  { num: "04", label: "Breeding Program" },
+  { num: "05", label: "Milk Customers" },
+  { num: "06", label: "Growing Ecosystem" },
+];
+
+const stats = [
+  { value: "10,000+", label: "Animals Raised" },
+  { value: "50,000+", label: "Liters of Milk Delivered" },
+  { value: "5,000+", label: "Happy Families" },
+  { value: "5+", label: "Years of Breeding Excellence" },
+];
+
+const businessChips = [
+  { initial: "M", name: "Maveshi Farms", href: "#" },
+  { initial: "A", name: "Alpha Farms", href: "/alpha-farms" },
+  { initial: "B", name: "Burraq Dairies", href: "#" },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div style={{ fontFamily: "var(--font-sans)", background: "#FBFAF8", color: "#1a1916", minHeight: "100vh" }}>
+      <Nav
+        brand="maveshi"
+        ctaLabel="Explore Our Ecosystem"
+        ctaHref="#ecosystem"
+        links={[
+          { label: "Our Story", href: "#" },
+          { label: "Our Ecosystem", href: "#ecosystem" },
+          { label: "Impact", href: "#impact" },
+          { label: "Contact", href: "#" },
+        ]}
+      />
+
+      {/* HERO — Variant A */}
+      <header style={{ maxWidth: 1240 }} className="mx-auto px-7 pt-[18px] pb-2">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.02fr_1.1fr] gap-12 items-center">
+          <div>
+            <div className="text-[12px] font-bold tracking-[0.2em] uppercase mb-[22px]" style={{ color: "#C5372C" }}>
+              THE JOURNEY
+            </div>
+            <h1
+              className="font-extrabold leading-[1.02] m-0 mb-[26px]"
+              style={{ fontSize: "clamp(34px,4.6vw,66px)", letterSpacing: "-0.025em" }}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              Never Thought I&apos;d End Up in Livestock.
+            </h1>
+            <p className="text-[18px] leading-[1.6] m-0 mb-[34px]" style={{ color: "#6b665c", maxWidth: 380 }}>
+              A computer scientist&apos;s journey to build a smarter, healthier future for goat farming — one goat at a time.
+            </p>
+            <Link
+              href="#ecosystem"
+              className="inline-flex items-center gap-[11px] font-semibold text-[15.5px] text-white no-underline px-[30px] py-[17px] rounded-[14px] transition-all duration-[250ms]"
+              style={{ background: "#C5372C", boxShadow: "0 12px 28px rgba(197,55,44,0.26)" }}
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              Explore the Journey <span className="text-[17px]">→</span>
+            </Link>
+          </div>
+
+          <HeroParallax>
+            <div
+              className="relative overflow-hidden h-[300px] lg:h-[560px] rounded-[20px] lg:rounded-[24px]"
+              style={{ boxShadow: "0 30px 70px rgba(30,25,18,0.16)" }}
+            >
+              <Image
+                src="/assets/hero.jpg"
+                alt="Founder with goats at Maveshi Farms"
+                fill
+                sizes="(max-width: 768px) calc(100vw - 56px), (max-width: 1240px) 55vw, 680px"
+                className="object-cover"
+                priority
+              />
+            </div>
+          </HeroParallax>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      </header>
+
+      <main style={{ maxWidth: 1240 }} className="mx-auto px-7 pt-9 pb-16 flex flex-col gap-[26px]">
+
+        {/* JOURNEY TIMELINE */}
+        <RevealSection
+          className="p-8 lg:pt-[54px] lg:px-[56px] lg:pb-[60px]"
+          style={{ background: "#F4F2EE", borderRadius: 28 }}
+        >
+          <div className="text-[12px] font-bold tracking-[0.2em] uppercase mb-[18px]" style={{ color: "#C5372C" }}>
+            IT STARTED WITH A QUESTION.
+          </div>
+          <h2
+            className="font-bold leading-[1.18] m-0 mb-[52px]"
+            style={{ fontSize: "clamp(26px,2.6vw,34px)", letterSpacing: "-0.02em", maxWidth: 520 }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            Why is livestock management still stuck in the past?
+          </h2>
+
+          <div className="overflow-x-auto -mx-2 px-2">
+          <div className="relative">
+            <div
+              className="absolute top-[23px] h-[2px] rounded-sm"
+              style={{ left: "calc(100%/12)", right: "calc(100%/12)", background: "#C5372C" }}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <div className="relative grid" style={{ gridTemplateColumns: "repeat(6,1fr)", minWidth: 560 }}>
+              {timelineSteps.map((step) => (
+                <div key={step.num} className="flex flex-col items-center gap-3">
+                  <div
+                    className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-[13px] z-10"
+                    style={{ border: "2px solid #C5372C", background: "#FBFAF8", color: "#C5372C" }}
+                  >
+                    {step.num}
+                  </div>
+                  <span className="text-[13px] font-medium text-center leading-[1.3]" style={{ color: "#6b665c" }}>
+                    {step.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+          </div>
+        </RevealSection>
+
+        {/* ECOSYSTEM */}
+        <RevealSection
+          id="ecosystem"
+          className="p-8 lg:pt-[54px] lg:px-[56px] lg:pb-[60px]"
+          style={{ background: "#F4F2EE", borderRadius: 28 }}
+        >
+          <div className="text-[12px] font-bold tracking-[0.2em] uppercase mb-[18px]" style={{ color: "#C5372C" }}>
+            THE ECOSYSTEM WE BUILT
+          </div>
+          <h2
+            className="font-extrabold leading-[1.12] m-0 mb-[36px]"
+            style={{ fontSize: "clamp(28px,2.8vw,38px)", letterSpacing: "-0.025em" }}
           >
-            Documentation
-          </a>
-        </div>
+            Three businesses. One vision.
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[26px]">
+            {ecosystemCards.map((card) => (
+              <Link
+                key={card.title}
+                href={card.href}
+                className="no-underline block rounded-[20px] overflow-hidden transition-all duration-300"
+                style={{
+                  background: "#FFFFFF",
+                  border: "1px solid #ddd7ce",
+                  boxShadow: "0 2px 10px rgba(30,25,18,0.05)",
+                }}
+              >
+                <div className="grid grid-cols-1 sm:grid-cols-[0.9fr_1.1fr]">
+                  <div className="relative overflow-hidden h-[200px] sm:h-auto sm:min-h-[220px]">
+                    <Image
+                      src={card.img}
+                      alt={card.imgAlt}
+                      fill
+                      className="object-cover"
+                      style={{ objectPosition: card.imgPosition }}
+                      sizes="(max-width: 640px) calc(100vw - 56px), 220px"
+                    />
+                  </div>
+                  <div className="p-6 flex flex-col gap-2">
+                    <div className="text-[12px] font-bold tracking-[0.14em]" style={{ color: "#C5372C" }}>
+                      {card.index}
+                    </div>
+                    <h3 className="text-[18px] font-bold m-0 leading-[1.2]" style={{ letterSpacing: "-0.01em", color: "#1a1916" }}>
+                      {card.title}
+                    </h3>
+                    <p className="text-[14px] leading-[1.55] m-0 mt-1" style={{ color: "#7a756b" }}>
+                      {card.description}
+                    </p>
+                    <div className="mt-auto pt-3">
+                      <div
+                        className="w-[38px] h-[38px] rounded-full flex items-center justify-center text-[16px]"
+                        style={{ border: "1.5px solid #ddd7ce", color: "#6b665c" }}
+                      >
+                        →
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </RevealSection>
+
+        {/* FOUNDER QUOTE */}
+        <RevealSection className="p-8 lg:pt-[54px] lg:px-[56px] lg:pb-[60px]" style={{ background: "#F4F2EE", borderRadius: 28 }}>
+          <div className="grid grid-cols-1 md:grid-cols-[1.25fr_0.75fr_0.55fr] gap-8 items-center">
+            <div>
+              <div
+                className="font-extrabold leading-none mb-4"
+                style={{ fontSize: 72, color: "#C5372C", lineHeight: 0.8, fontFamily: "Georgia, serif" }}
+              >
+                &ldquo;
+              </div>
+              <blockquote
+                className="m-0 font-bold leading-[1.32]"
+                style={{ fontSize: "clamp(22px,2.2vw,28px)", letterSpacing: "-0.015em" }}
+              >
+                I built software systems that scaled to millions of users. Then I asked: why can&apos;t a farmer know the health of his herd in real time?
+              </blockquote>
+            </div>
+
+            <div
+              className="mx-auto flex items-center justify-center text-[13px] font-medium"
+              style={{ width: 230, height: 280, borderRadius: 20, background: "#E8E4DE", color: "#a8a298" }}
+            >
+              Founder portrait
+            </div>
+
+            <div className="flex flex-col gap-4">
+              <div
+                className="font-semibold"
+                style={{ fontFamily: "var(--font-accent)", fontSize: 40, lineHeight: 1.1 }}
+              >
+                Atique
+              </div>
+              <div style={{ width: 56, height: 1, background: "#ddd7ce" }} />
+              <div>
+                <div className="text-[14px] font-semibold">Founder</div>
+                <div className="text-[13px] font-medium" style={{ color: "#8a857d" }}>Maveshi Farms</div>
+              </div>
+            </div>
+          </div>
+        </RevealSection>
+
+        {/* IMPACT STATS */}
+        <RevealSection
+          id="impact"
+          className="p-8 lg:pt-[54px] lg:px-[56px] lg:pb-[60px]"
+          style={{ background: "#F4F2EE", borderRadius: 28 }}
+        >
+          <div className="text-[12px] font-bold tracking-[0.2em] uppercase mb-[18px] text-center" style={{ color: "#C5372C" }}>
+            THE IMPACT
+          </div>
+          <h2
+            className="font-extrabold leading-[1.12] m-0 mb-[48px] text-center"
+            style={{ fontSize: "clamp(28px,2.8vw,38px)", letterSpacing: "-0.025em" }}
+          >
+            Numbers that matter
+          </h2>
+          <div className="grid grid-cols-2 lg:grid-cols-4">
+            {stats.map((stat) => (
+              <StatCounter key={stat.label} value={stat.value} label={stat.label} />
+            ))}
+          </div>
+        </RevealSection>
+
+        {/* BUSINESSES CTA */}
+        <RevealSection className="text-center py-[56px]">
+          <div className="text-[12px] font-bold tracking-[0.2em] uppercase mb-4" style={{ color: "#C5372C" }}>
+            FOLLOW THE JOURNEY
+          </div>
+          <h2
+            className="font-extrabold m-0 mb-3"
+            style={{ fontSize: "clamp(28px,2.8vw,38px)", letterSpacing: "-0.025em" }}
+          >
+            Explore Our Businesses
+          </h2>
+          <p className="text-[17px] m-0 mb-10" style={{ color: "#6b665c" }}>
+            Different purpose. One vision.
+          </p>
+
+          <div className="flex items-center justify-center gap-4 flex-wrap">
+            {businessChips.map((chip) => (
+              <Link
+                key={chip.name}
+                href={chip.href}
+                className="inline-flex items-center gap-3 no-underline font-semibold text-[15px] px-6 py-4 rounded-[16px] transition-all duration-[250ms]"
+                style={{
+                  background: "#FFFFFF",
+                  border: "1.5px solid #ddd7ce",
+                  minWidth: 230,
+                  color: "#1a1916",
+                  boxShadow: "0 2px 10px rgba(30,25,18,0.05)",
+                }}
+              >
+                <span
+                  className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-[13px] font-extrabold flex-shrink-0"
+                  style={{ background: "#C5372C" }}
+                >
+                  {chip.initial}
+                </span>
+                {chip.name}
+                <span className="ml-auto" style={{ color: "#C5372C" }}>→</span>
+              </Link>
+            ))}
+          </div>
+        </RevealSection>
       </main>
+
+      <Footer
+        brand="maveshi"
+        tagline="From code to care, from livestock to legacy."
+        copyright="© 2026 Maveshi Farms"
+      />
     </div>
   );
 }
