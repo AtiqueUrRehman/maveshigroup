@@ -224,11 +224,11 @@ export default function PricingTimeline({
           {/* BEFORE goat — bottom-anchored so feet always sit on the line */}
           <div style={{ position: "absolute", left: 0, bottom: CONTAINER_H - LINE_TOP, filter: "drop-shadow(0 10px 18px rgba(0,0,0,0.18))" }}>
             {beforeImage ? (
-              <div className="relative w-[88px] sm:w-[105px] h-[145px] sm:h-[200px]">
-                <Image src={beforeImage} alt="Day 1 goat" fill className="object-contain object-bottom" sizes="(max-width:640px) 88px, 105px" />
+              <div className="relative w-[68px] sm:w-[105px] h-[112px] sm:h-[200px]">
+                <Image src={beforeImage} alt="Day 1 goat" fill className="object-contain object-bottom" sizes="(max-width:640px) 68px, 105px" />
               </div>
             ) : (
-              <div className="w-[88px] sm:w-[105px] h-[145px] sm:h-[200px] flex items-end justify-center pb-2 text-[11px] font-medium" style={{ color: "#a8a298" }}>Before</div>
+              <div className="w-[68px] sm:w-[105px] h-[112px] sm:h-[200px] flex items-end justify-center pb-2 text-[11px] font-medium" style={{ color: "#a8a298" }}>Before</div>
             )}
           </div>
 
@@ -245,11 +245,11 @@ export default function PricingTimeline({
             }}
           >
             {afterImage ? (
-              <div className="relative w-[150px] sm:w-[200px] h-[200px] sm:h-[210px]">
-                <Image src={afterImage} alt="Eid goat" fill className="object-contain object-bottom" sizes="(max-width:640px) 150px, 200px" />
+              <div className="relative w-[130px] sm:w-[200px] h-[180px] sm:h-[210px]">
+                <Image src={afterImage} alt="Eid goat" fill className="object-contain object-bottom" sizes="(max-width:640px) 130px, 200px" />
               </div>
             ) : (
-              <div className="w-[150px] sm:w-[200px] h-[200px] sm:h-[210px] flex items-end justify-center pb-2 text-[11px] font-medium" style={{ color: "#a8a298" }}>After</div>
+              <div className="w-[130px] sm:w-[200px] h-[180px] sm:h-[210px] flex items-end justify-center pb-2 text-[11px] font-medium" style={{ color: "#a8a298" }}>After</div>
             )}
           </div>
 
