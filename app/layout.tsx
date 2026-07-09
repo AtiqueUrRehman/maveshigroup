@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Hanken_Grotesk, Caveat } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
 const hanken = Hanken_Grotesk({
@@ -29,6 +30,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${hanken.variable} ${caveat.variable}`} data-scroll-behavior="smooth">
       <body>{children}</body>
+      {process.env.NEXT_PUBLIC_GA_ID && (
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+      )}
     </html>
   );
 }
