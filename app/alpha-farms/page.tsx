@@ -111,6 +111,7 @@ export default function AlphaFarms() {
         {/* HOW IT WORKS */}
         <RevealSection
           id="how"
+          track="alpha_how"
           className="p-8 lg:pt-[54px] lg:px-[56px] lg:pb-[60px]"
           style={{ background: "#F4F2EE", borderRadius: 28 }}
         >
@@ -159,6 +160,7 @@ export default function AlphaFarms() {
         {/* PRICING */}
         <RevealSection
           id="pricing"
+          track="alpha_pricing"
           className="p-8 lg:pt-[54px] lg:px-[56px] lg:pb-[60px]"
           style={{ background: "#F4F2EE", borderRadius: 28 }}
         >
@@ -173,6 +175,7 @@ export default function AlphaFarms() {
         {/* FAQ */}
         <RevealSection
           id="faq"
+          track="alpha_faq"
           className="p-8 lg:pt-[54px] lg:px-[56px] lg:pb-[60px]"
           style={{ background: "#F4F2EE", borderRadius: 28 }}
         >
@@ -198,6 +201,7 @@ export default function AlphaFarms() {
 
         {/* CTA BAND */}
         <RevealSection
+          track="alpha_cta"
           className="text-center rounded-[28px] px-6 py-10 sm:px-12 sm:py-12 lg:px-[56px] lg:py-[60px]"
           style={{ background: "#2A5C35" }}
         >

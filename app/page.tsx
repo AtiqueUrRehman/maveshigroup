@@ -121,6 +121,7 @@ export default function Home() {
 
         {/* ORIGIN STORY */}
         <RevealSection
+          track="home_story"
           className="p-8 lg:pt-[54px] lg:px-[56px] lg:pb-[60px]"
           style={{ background: "#F4F2EE", borderRadius: 28 }}
         >
@@ -144,6 +145,7 @@ export default function Home() {
         {/* ECOSYSTEM */}
         <RevealSection
           id="ecosystem"
+          track="home_ecosystem"
           className="p-8 lg:pt-[54px] lg:px-[56px] lg:pb-[60px]"
           style={{ background: "#F4F2EE", borderRadius: 28 }}
         >
@@ -206,7 +208,7 @@ export default function Home() {
         </RevealSection>
 
         {/* FOUNDER QUOTE */}
-        <RevealSection className="p-8 lg:pt-[54px] lg:px-[56px] lg:pb-[60px]" style={{ background: "#F4F2EE", borderRadius: 28 }}>
+        <RevealSection track="home_founder" className="p-8 lg:pt-[54px] lg:px-[56px] lg:pb-[60px]" style={{ background: "#F4F2EE", borderRadius: 28 }}>
           <div className="grid grid-cols-1 md:grid-cols-[1.25fr_0.75fr_0.55fr] gap-8 items-center">
             <div>
               <div
@@ -256,6 +258,7 @@ export default function Home() {
         {/* IMPACT STATS */}
         <RevealSection
           id="impact"
+          track="home_impact"
           className="p-8 lg:pt-[54px] lg:px-[56px] lg:pb-[60px]"
           style={{ background: "#F4F2EE", borderRadius: 28 }}
         >
@@ -276,7 +279,7 @@ export default function Home() {
         </RevealSection>
 
         {/* BUSINESSES CTA */}
-        <RevealSection className="text-center py-[56px]">
+        <RevealSection track="home_businesses" className="text-center py-[56px]">
           <div className="text-[12px] font-bold tracking-[0.2em] uppercase mb-4" style={{ color: "#C5372C" }}>
             FOLLOW THE JOURNEY
           </div>

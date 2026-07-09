@@ -8,6 +8,8 @@ interface RevealSectionProps {
   style?: React.CSSProperties;
   delay?: number;
   id?: string;
+  /** When set, emits a GA4 `section_view` event with this name when scrolled into view. */
+  track?: string;
 }
 
 export default function RevealSection({
@@ -16,6 +18,7 @@ export default function RevealSection({
   style,
   delay = 0,
   id,
+  track,
 }: RevealSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -55,6 +58,7 @@ export default function RevealSection({
     <div
       ref={ref}
       id={id}
+      data-ga-section={track}
       className={className}
       style={{
         opacity: 0,

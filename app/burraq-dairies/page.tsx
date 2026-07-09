@@ -36,7 +36,7 @@ export default function BurraqDairies() {
       </nav>
 
       {/* HERO */}
-      <section style={{ maxWidth: 1240 }} className="mx-auto px-7 pt-10 pb-4">
+      <section data-ga-section="burraq_hero" style={{ maxWidth: 1240 }} className="mx-auto px-7 pt-10 pb-4">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 items-center">
           <div>
             <h1
@@ -79,7 +79,7 @@ export default function BurraqDairies() {
       </section>
 
       {/* CATALOGUE */}
-      <main style={{ maxWidth: 1240 }} className="mx-auto px-7 pt-16 pb-20">
+      <main data-ga-section="burraq_catalogue" style={{ maxWidth: 1240 }} className="mx-auto px-7 pt-16 pb-20">
         <div className="text-[12px] font-bold tracking-[0.2em] uppercase mb-[18px]" style={{ color: "#8a857d" }}>
           CATALOGUE
         </div>
