@@ -11,7 +11,7 @@ import WhatsAppLink from "../components/WhatsAppLink";
 const steps = [
   {
     num: "01",
-    title: "Pick from our catalog",
+    title: "Pick from our catalog, or send yours",
     description: "Browse our herd via short video clips. Choose the goat you connect with — size, breed, and look. Nothing seems interesting? Let us know your preference and we'll arrange. Want to arrange yourself? Sure!",
   },
   {
