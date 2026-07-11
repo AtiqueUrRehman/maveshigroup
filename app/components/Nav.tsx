@@ -28,7 +28,7 @@ export default function Nav({ brand, ctaLabel, ctaHref, links }: NavProps) {
 
   return (
     <nav
-      style={{ maxWidth: 1240, fontFamily: "var(--font-sans)" }}
+      style={{ maxWidth: 1240, fontFamily: "inherit" }}
       className="mx-auto px-7 py-[22px] flex items-center justify-between gap-6"
     >
       {/* Logo + wordmark */}

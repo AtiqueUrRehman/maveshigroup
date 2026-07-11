@@ -50,3 +50,18 @@ body {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-9px); }
 }
+
+/* Nastaliq (Urdu / Gulzar) typography: Nastaliq sits tall and sloped, so it
+   needs generous line-height and no negative letter-tracking or it clips.
+   Applied only on the Urdu container via the .urdu-type class. */
+.urdu-type {
+  line-height: 2;
+}
+.urdu-type * {
+  letter-spacing: normal !important;
+}
+.urdu-type h1 { line-height: 1.95 !important; }
+.urdu-type h2 { line-height: 1.85 !important; }
+.urdu-type h3 { line-height: 1.9 !important; }
+.urdu-type p,
+.urdu-type li { line-height: 2.05 !important; }

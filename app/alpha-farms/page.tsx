@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
@@ -6,59 +9,94 @@ import HeroParallax from "../components/HeroParallax";
 import FaqAccordion from "../components/FaqAccordion";
 import PricingTimeline from "../components/PricingTimeline";
 import WhatsAppLink from "../components/WhatsAppLink";
+import { content, type Lang } from "./content";
 
-const steps = [
-  {
-    num: "01",
-    title: "Pick from our catalog, or send yours",
-    description: "Browse our herd via short video clips. Choose the goat you connect with — size, breed, and look. Nothing seems interesting? Let us know your preference and we'll arrange. Want to arrange yourself? Sure!",
-  },
-  {
-    num: "02",
-    title: "We raise & care",
-    description: "Your reserved goat stays at our farm, fed a healthy diet and monitored by our team daily.",
-  },
-  {
-    num: "03",
-    title: "Monthly updates",
-    description: "Receive photo and video updates every month so you watch your goat grow in real time.",
-  },
-  {
-    num: "04",
-    title: "Delivered before Eid",
-    description: "We arrange doorstep delivery in the final week before Eid — fresh, healthy, on time.",
-  },
-];
-
+function LangToggle({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
+  const base = "text-[13px] font-semibold px-3 py-[6px] rounded-full transition-colors cursor-pointer";
+  return (
+    <div
+      className="inline-flex items-center gap-1 p-1 rounded-full"
+      style={{ background: "#EEF5F0", border: "1px solid #d9e5dd" }}
+      dir="ltr"
+    >
+      <button
+        onClick={() => setLang("en")}
+        className={base}
+        style={{ background: lang === "en" ? "#2A5C35" : "transparent", color: lang === "en" ? "#fff" : "#2A5C35", fontFamily: "var(--font-sans)" }}
+      >
+        EN
+      </button>
+      <button
+        onClick={() => setLang("ur")}
+        className={base}
+        style={{ background: lang === "ur" ? "#2A5C35" : "transparent", color: lang === "ur" ? "#fff" : "#2A5C35", fontFamily: "var(--font-urdu)" }}
+      >
+        اردو
+      </button>
+    </div>
+  );
+}
 
 export default function AlphaFarms() {
+  const [lang, setLang] = useState<Lang>("en");
+
+  // Restore saved choice on mount (kept out of initial render to avoid hydration mismatch).
+  useEffect(() => {
+    const saved = window.localStorage.getItem("alpha-lang");
+    if (saved === "ur" || saved === "en") setLang(saved);
+  }, []);
+
+  const changeLang = (l: Lang) => {
+    setLang(l);
+    window.localStorage.setItem("alpha-lang", l);
+  };
+
+  const t = content[lang];
+  const isUr = lang === "ur";
+
   return (
-    <div style={{ fontFamily: "var(--font-sans)", background: "#FBFAF8", color: "#1a1916", minHeight: "100vh" }}>
+    <div
+      dir={t.dir}
+      className={isUr ? "urdu-type" : undefined}
+      style={{
+        fontFamily: isUr ? "var(--font-urdu), var(--font-sans)" : "var(--font-sans)",
+        background: "#FBFAF8",
+        color: "#1a1916",
+        minHeight: "100vh",
+      }}
+    >
       <Nav
         brand="alpha"
         links={[
-          { label: "How It Works", href: "#how" },
-          { label: "Pricing", href: "#pricing" },
-          { label: "FAQ", href: "#faq" },
-          { label: "← Maveshi Farms Story", href: "/", faint: true },
+          { label: t.nav.howItWorks, href: "#how" },
+          { label: t.nav.pricing, href: "#pricing" },
+          { label: t.nav.faq, href: "#faq" },
+          { label: t.nav.back, href: "/", faint: true },
         ]}
       />
+
+      {/* Language toggle */}
+      <div style={{ maxWidth: 1240 }} className="mx-auto px-7 flex justify-end">
+        <LangToggle lang={lang} setLang={changeLang} />
+      </div>
 
       {/* HERO */}
       <header style={{ maxWidth: 1240 }} className="mx-auto px-7 pt-[18px] pb-2">
         <div className="grid grid-cols-1 lg:grid-cols-[1.02fr_1.1fr] gap-12 items-center">
           <div>
             <div className="text-[12px] font-bold tracking-[0.2em] uppercase mb-[22px]" style={{ color: "#2A5C35" }}>
-              ALPHA FARMS · QURBANI
+              {t.hero.eyebrow}
             </div>
             <h1
               className="font-extrabold leading-[1.04] m-0 mb-[26px]"
               style={{ fontSize: "clamp(32px,4.4vw,62px)", letterSpacing: "-0.025em" }}
             >
-              Reserve your goat. We raise it. We deliver it for <span style={{ color: "#2A5C35" }}>Eid.</span>
+              {t.hero.titleLead}
+              <span style={{ color: "#2A5C35" }}>{t.hero.titleHighlight}</span>
+              {t.hero.titleTail}
             </h1>
             <p className="text-[18px] leading-[1.6] m-0 mb-[34px]" style={{ color: "#6b665c", maxWidth: 430 }}>
-              Choose your Qurbani goat, we handle everything — feed, care, medication, monthly updates, and Eid delivery.
+              {t.hero.subtitle}
             </p>
           </div>
 
@@ -69,7 +107,7 @@ export default function AlphaFarms() {
             >
               <Image
                 src="/assets/card-alpha.jpg"
-                alt="A healthy Qurbani goat at Alpha Farms"
+                alt={t.hero.imgAlt}
                 fill
                 sizes="(max-width: 768px) calc(100vw - 56px), (max-width: 1240px) 55vw, 680px"
                 className="object-cover"
@@ -90,22 +128,22 @@ export default function AlphaFarms() {
           style={{ background: "#F4F2EE", borderRadius: 28 }}
         >
           <div className="text-[12px] font-bold tracking-[0.2em] uppercase mb-[18px]" style={{ color: "#2A5C35" }}>
-            HOW IT WORKS
+            {t.steps.eyebrow}
           </div>
           <h2
             className="font-extrabold leading-[1.12] m-0 mb-3"
             style={{ fontSize: "clamp(28px,2.8vw,38px)", letterSpacing: "-0.025em" }}
           >
-            Four steps to Eid
+            {t.steps.heading}
           </h2>
           <p className="text-[17px] leading-[1.6] m-0 mb-[40px]" style={{ color: "#6b665c" }}>
-            Simple, transparent, and handled end-to-end by our team.
+            {t.steps.subtitle}
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[22px]">
-            {steps.map((step, i) => (
+            {t.steps.items.map((step, i) => (
               <RevealSection
-                key={step.num}
+                key={i}
                 delay={i * 90}
                 className="rounded-[20px] p-[30px_26px] transition-all duration-300"
                 style={{
@@ -116,9 +154,9 @@ export default function AlphaFarms() {
               >
                 <div
                   className="w-[46px] h-[46px] rounded-full flex items-center justify-center font-bold text-[15px] mb-5"
-                  style={{ background: "#FBF1EF", color: "#2A5C35" }}
+                  style={{ background: "#FBF1EF", color: "#2A5C35", fontFamily: "var(--font-sans)" }}
                 >
-                  {step.num}
+                  {String(i + 1).padStart(2, "0")}
                 </div>
                 <h3 className="text-[18px] font-bold m-0 mb-2 leading-[1.2]" style={{ letterSpacing: "-0.01em" }}>
                   {step.title}
@@ -139,6 +177,7 @@ export default function AlphaFarms() {
           style={{ background: "#F4F2EE", borderRadius: 28 }}
         >
           <PricingTimeline
+            t={t.pricing}
             goatPrice={75000}
             months={8}
             beforeImage="/assets/goat-before.png"
@@ -156,20 +195,20 @@ export default function AlphaFarms() {
           <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.4fr] gap-12">
             <div>
               <div className="text-[12px] font-bold tracking-[0.2em] uppercase mb-[18px]" style={{ color: "#2A5C35" }}>
-                COMMON QUESTIONS
+                {t.faq.eyebrow}
               </div>
               <h2
                 className="font-extrabold leading-[1.12] m-0 mb-4"
                 style={{ fontSize: "clamp(28px,2.8vw,38px)", letterSpacing: "-0.025em" }}
               >
-                Good to know
+                {t.faq.heading}
               </h2>
               <p className="text-[16px] leading-[1.6] m-0" style={{ color: "#6b665c" }}>
-                Everything you&apos;d want to ask before reserving — answered.
+                {t.faq.subtitle}
               </p>
             </div>
 
-            <FaqAccordion />
+            <FaqAccordion items={t.faq.items} />
           </div>
         </RevealSection>
 
@@ -183,30 +222,30 @@ export default function AlphaFarms() {
             className="font-extrabold leading-[1.12] m-0 mb-4 text-white"
             style={{ fontSize: "clamp(28px,2.8vw,38px)", letterSpacing: "-0.025em" }}
           >
-            Ready to reserve your Qurbani goat?
+            {t.cta.heading}
           </h2>
           <p className="text-[17px] leading-[1.6] m-0 mb-8" style={{ color: "rgba(255,255,255,0.82)" }}>
-            Browse available goats by video and lock in your reservation before spots fill up.
+            {t.cta.subtitle}
           </p>
           <WhatsAppLink
             business="alpha"
             location="cta_band"
-            href="https://wa.me/923130794980?text=Hey%2C%20I%20saw%20your%20website%20and%20I%20am%20interested%20in%20Palai."
+            href={t.cta.waHref}
             className="inline-flex items-center gap-3 no-underline font-semibold text-[15.5px] px-8 py-[17px] rounded-[999px] transition-all duration-[250ms]"
             style={{ background: "#FFFFFF", color: "#2A5C35" }}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
             </svg>
-            Chat on WhatsApp
+            {t.cta.button}
           </WhatsAppLink>
         </RevealSection>
       </main>
 
       <Footer
         brand="alpha"
-        tagline="Qurbani aap ki, zimedari hamari."
-        copyright="© 2026 Alpha Farms · A Maveshi Farms company"
+        tagline={t.footer.tagline}
+        copyright={t.footer.copyright}
       />
     </div>
   );

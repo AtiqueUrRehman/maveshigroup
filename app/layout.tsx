@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Hanken_Grotesk, Caveat } from "next/font/google";
+import { Hanken_Grotesk, Caveat, Gulzar } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import AnalyticsTracker from "./components/AnalyticsTracker";
 import "./globals.css";
@@ -18,6 +18,15 @@ const caveat = Caveat({
   display: "swap",
 });
 
+// Urdu font — Gulzar (Nastaliq). Single weight; see .urdu-type in globals.css
+// for the line-height/letter-spacing tuning Nastaliq needs.
+const gulzar = Gulzar({
+  variable: "--font-urdu",
+  subsets: ["arabic"],
+  weight: ["400"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Maveshi Farms — From Code to Care",
   description: "A computer scientist's journey to build a smarter, healthier future for goat farming.",
@@ -29,7 +38,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${hanken.variable} ${caveat.variable}`} data-scroll-behavior="smooth">
+    <html
+      lang="en"
+      className={`${hanken.variable} ${caveat.variable} ${gulzar.variable}`}
+      data-scroll-behavior="smooth"
+    >
       <body>{children}</body>
       {process.env.NEXT_PUBLIC_GA_ID && (
         <>

@@ -18,7 +18,7 @@ export default function Footer({ brand, tagline, copyright }: FooterProps) {
       className="border-t"
       style={{
         borderColor: "#ece8e2",
-        fontFamily: "var(--font-sans)",
+        fontFamily: "inherit",
       }}
     >
       <div

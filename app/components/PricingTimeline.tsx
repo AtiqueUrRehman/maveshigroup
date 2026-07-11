@@ -2,8 +2,10 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
+import type { PricingCopy } from "../alpha-farms/content";
 
 interface Props {
+  t: PricingCopy;
   beforeImage?: string;
   afterImage?: string;
   goatPrice?: number;
@@ -21,6 +23,7 @@ const HEAVY_MONTHS = 2; // last N months cost HEAVY_CARE
 const shortAmount = (n: number) => (n % 1000 === 0 ? `${n / 1000}k` : n.toLocaleString());
 
 export default function PricingTimeline({
+  t,
   beforeImage,
   afterImage,
   goatPrice: defaultGoatPrice = 75000,
@@ -98,10 +101,10 @@ export default function PricingTimeline({
         {/* Title — second on mobile, first on desktop */}
         <div className="order-2 sm:order-1">
           <div className="text-[12px] font-bold tracking-[0.2em] uppercase mb-3" style={{ color: "#2A5C35" }}>
-            HOW IT ADDS UP
+            {t.eyebrow}
           </div>
           <h2 className="font-bold m-0" style={{ fontSize: "clamp(18px,1.8vw,24px)", letterSpacing: "-0.015em", color: "#1a1916" }}>
-            Buy once, care monthly, collect on Eid.
+            {t.heading}
           </h2>
         </div>
 
@@ -112,7 +115,7 @@ export default function PricingTimeline({
           <div className="flex items-center justify-between sm:hidden">
             <div>
               <div className="text-[11px] font-bold tracking-[0.16em] uppercase mb-1" style={{ color: "#9a948a" }}>
-                TOTAL BY EID
+                {t.totalByEid}
               </div>
               <div className="font-extrabold leading-none" style={{ fontSize: "clamp(28px,3vw,44px)", color: "#2A5C35", letterSpacing: "-0.02em" }}>
                 Rs {animatedTotal.toLocaleString()}
@@ -131,14 +134,14 @@ export default function PricingTimeline({
               }}
             >
               <span style={{ display: "inline-block", transition: "transform 0.4s ease", transform: playing ? "rotate(-180deg)" : "rotate(0deg)" }}>↺</span>
-              {" "}Replay
+              {" "}{t.replay}
             </button>
           </div>
 
           {/* Desktop: stacked, right-aligned */}
           <div className="hidden sm:flex flex-col items-end gap-1.5">
             <div className="text-[11px] font-bold tracking-[0.16em] uppercase" style={{ color: "#9a948a" }}>
-              TOTAL BY EID
+              {t.totalByEid}
             </div>
             <div className="flex items-center gap-3">
               <div className="font-extrabold leading-none" style={{ fontSize: "clamp(30px,3vw,44px)", color: "#2A5C35", letterSpacing: "-0.02em" }}>
@@ -157,7 +160,7 @@ export default function PricingTimeline({
                 }}
               >
                 <span style={{ display: "inline-block", transition: "transform 0.4s ease", transform: playing ? "rotate(-180deg)" : "rotate(0deg)" }}>↺</span>
-                {" "}Replay
+                {" "}{t.replay}
               </button>
             </div>
           </div>
@@ -174,7 +177,7 @@ export default function PricingTimeline({
           {/* Base price */}
           <div>
             <div className="text-[11px] font-bold tracking-[0.14em] uppercase mb-[8px]" style={{ color: "#9a948a" }}>
-              Goat Price
+              {t.goatPrice}
             </div>
             <div className="flex items-center gap-1.5 rounded-[10px] px-3 py-[9px]" style={{ background: "#F4F2EE" }}>
               <span className="text-[13px] font-semibold shrink-0" style={{ color: "#9a948a" }}>Rs</span>
@@ -192,7 +195,7 @@ export default function PricingTimeline({
           {/* Months */}
           <div>
             <div className="text-[11px] font-bold tracking-[0.14em] uppercase mb-[8px]" style={{ color: "#9a948a" }}>
-              Months of Care
+              {t.monthsOfCare}
             </div>
             <div className="rounded-[10px] px-3 py-[9px]" style={{ background: "#F4F2EE" }}>
               <select
@@ -202,7 +205,7 @@ export default function PricingTimeline({
                 style={{ color: "#1a1916", fontFamily: "inherit", cursor: "pointer" }}
               >
                 {[5, 6, 7, 8, 9, 10, 11].map((m) => (
-                  <option key={m} value={m}>{m} months</option>
+                  <option key={m} value={m}>{m} {t.monthsUnit}</option>
                 ))}
               </select>
             </div>
@@ -291,9 +294,9 @@ export default function PricingTimeline({
                 border: "1px solid #ddd7ce",
               }}
             >
-              weight &gt; 70 kg
+              {t.weightMarker}
               <span style={{ display: "block", fontSize: 10, opacity: 0.8, marginTop: 1 }}>
-                Rs {HEAVY_CARE.toLocaleString()} / mo
+                Rs {HEAVY_CARE.toLocaleString()} {t.perMo}
               </span>
             </div>
           </div>
@@ -339,14 +342,14 @@ export default function PricingTimeline({
 
           {/* RESERVE label — below chip row so it never overlaps */}
           <div style={{ position: "absolute", top: LINE_TOP + 44, left: 0, whiteSpace: "nowrap" }}>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", color: "#1a1916" }}>RESERVE</div>
-            <div style={{ fontSize: 12, color: "#6b665c", marginTop: 2 }}>Pay Rs {customPrice.toLocaleString()} once</div>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", color: "#1a1916" }}>{t.reserve}</div>
+            <div style={{ fontSize: 12, color: "#6b665c", marginTop: 2 }}>{t.payOnce.replace("{price}", `Rs ${customPrice.toLocaleString()}`)}</div>
           </div>
 
           {/* EID label — below chip row so it never overlaps */}
           <div style={{ position: "absolute", top: LINE_TOP + 44, right: 0, textAlign: "right", whiteSpace: "nowrap" }}>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", color: "#1a1916" }}>EID · DELIVERED</div>
-            <div style={{ fontSize: 12, color: "#6b665c", marginTop: 2 }}>Healthy, at your door</div>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", color: "#1a1916" }}>{t.eidDelivered}</div>
+            <div style={{ fontSize: 12, color: "#6b665c", marginTop: 2 }}>{t.atYourDoor}</div>
           </div>
 
         </div>
@@ -355,7 +358,7 @@ export default function PricingTimeline({
       {/* ── Formula footer ── */}
       <div className="flex items-center flex-wrap gap-x-4 gap-y-2 mt-8 pt-6" style={{ borderTop: "1px solid #ece8e2" }}>
         <span className="text-[14px]" style={{ color: "#1a1916" }}>
-          <strong>Rs {customPrice.toLocaleString()}</strong> goat
+          <strong>Rs {customPrice.toLocaleString()}</strong> {t.goatWord}
         </span>
         <span className="font-light text-[18px]" style={{ color: "#ddd7ce" }}>+</span>
         <span className="text-[14px]" style={{ color: "#1a1916" }}>
@@ -364,11 +367,11 @@ export default function PricingTimeline({
         <span className="font-light text-[18px]" style={{ color: "#ddd7ce" }}>+</span>
         <span className="text-[14px]" style={{ color: "#1a1916" }}>
           <strong>{HEAVY_MONTHS} × Rs {HEAVY_CARE.toLocaleString()}</strong>
-          <span className="text-[12px] font-normal ml-1" style={{ color: "#9a948a" }}>(≥ 70 kg)</span>
+          <span className="text-[12px] font-normal ml-1" style={{ color: "#9a948a" }}>{t.overThreshold}</span>
         </span>
         <span className="text-[18px]" style={{ color: "#2A5C35" }}>→</span>
         <span className="text-[14px] font-semibold" style={{ color: "#2A5C35" }}>
-          Rs {total.toLocaleString()} total
+          Rs {total.toLocaleString()} {t.totalWord}
         </span>
       </div>
       </div> {/* close timeline inner */}
@@ -379,47 +382,47 @@ export default function PricingTimeline({
 
         <div className="rounded-[16px] p-5 sm:p-6" style={{ background: "#FFFFFF", border: "1px solid #e8e3db" }}>
           <div className="text-[11px] font-bold tracking-[0.14em] uppercase mb-3" style={{ color: "#9a948a" }}>
-            GOAT PRICE
+            {t.cards.goatPriceLabel}
           </div>
           <div className="font-extrabold leading-tight mb-3" style={{ fontSize: "clamp(20px,2vw,26px)", color: "#2A5C35" }}>
-            From Rs 55,000
+            {t.cards.goatPriceValue}
           </div>
           <p className="text-[13px] leading-[1.6] m-0" style={{ color: "#6b665c" }}>
-            One-time, set when you reserve. Varies by breed, weight and age — shown on each goat.
+            {t.cards.goatPriceDesc}
           </p>
         </div>
 
         <div className="rounded-[16px] p-5 sm:p-6" style={{ background: "#FFFFFF", border: "1px solid #e8e3db" }}>
           <div className="text-[11px] font-bold tracking-[0.14em] uppercase mb-3" style={{ color: "#9a948a" }}>
-            MONTHLY CARE
+            {t.cards.monthlyLabel}
           </div>
           <div className="font-extrabold leading-tight mb-3" style={{ fontSize: "clamp(20px,2vw,26px)", color: "#2A5C35" }}>
-            Rs 11,000–14,000 / mo
+            {t.cards.monthlyValue}
           </div>
           <div className="flex flex-col gap-1.5 mb-3">
             <div className="flex items-center justify-between gap-2 text-[13px]">
-              <span style={{ color: "#6b665c" }}>Under 70 kg</span>
-              <span className="font-semibold" style={{ color: "#1a1916" }}>Rs 11,000 / mo</span>
+              <span style={{ color: "#6b665c" }}>{t.cards.under70}</span>
+              <span className="font-semibold" style={{ color: "#1a1916" }}>{t.cards.light}</span>
             </div>
             <div className="flex items-center justify-between gap-2 text-[13px]">
-              <span style={{ color: "#6b665c" }}>Over 70 kg</span>
-              <span className="font-semibold" style={{ color: "#1a1916" }}>Rs 14,000 / mo</span>
+              <span style={{ color: "#6b665c" }}>{t.cards.over70}</span>
+              <span className="font-semibold" style={{ color: "#1a1916" }}>{t.cards.heavy}</span>
             </div>
           </div>
           <p className="text-[13px] leading-[1.6] m-0" style={{ color: "#6b665c" }}>
-            Per goat, billed monthly until Eid. Covers feed, water, shelter, vaccinations and vet care.
+            {t.cards.monthlyDesc}
           </p>
         </div>
 
         <div className="rounded-[16px] p-5 sm:p-6" style={{ background: "#FFFFFF", border: "1px solid #e8e3db" }}>
           <div className="text-[11px] font-bold tracking-[0.14em] uppercase mb-3" style={{ color: "#9a948a" }}>
-            DELIVERY
+            {t.cards.deliveryLabel}
           </div>
           <div className="font-extrabold leading-tight mb-3" style={{ fontSize: "clamp(20px,2vw,26px)", color: "#2A5C35" }}>
-            Rs 5,000 or less
+            {t.cards.deliveryValue}
           </div>
           <p className="text-[13px] leading-[1.6] m-0" style={{ color: "#6b665c" }}>
-            Major cities delivered 3–5 days before Eid. Other cities at actual transport cost.
+            {t.cards.deliveryDesc}
           </p>
         </div>
 

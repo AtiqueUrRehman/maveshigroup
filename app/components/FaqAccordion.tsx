@@ -1,49 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import type { FaqItem } from "../alpha-farms/content";
 
-interface FaqItem {
-  question: string;
-  answer: string;
-}
-
-const faqs: FaqItem[] = [
-  {
-    question: "What does the monthly care fee cover?",
-    answer: "The monthly care fee (Rs 11,000–14,000) covers full feed, veterinary check-ups, grooming, and housing at our farm. You receive monthly photo and video updates of your goat so you can follow its progress.",
-  },
-  {
-    question: "What happens if the goat gets sick or passes away?",
-    answer: "In the rare event of illness, we cover all veterinary costs at no extra charge. If a goat passes away due to illness, we issue a 50% refund of the total amount paid to date. Full terms available in our reservation agreement.",
-  },
-  {
-    question: "Can I visit the farm to see my goat?",
-    answer: "Yes — farm visits are welcome by appointment. We'll confirm a time that works with our farm schedule and ensure your goat is ready for you.",
-  },
-  {
-    question: "How is delivery handled before Eid?",
-    answer: "We arrange delivery to your doorstep or nearest convenient location for a flat fee of Rs 5,000 or less, depending on your area. Delivery is scheduled in the final week before Eid so your goat arrives fresh and on time.",
-  },
-  {
-    question: "What if my goat dies?",
-    answer: "We have qualified veterinary doctors on our team to handle any medical cases, backed by blood and fecal laboratory support. In the rare event the animal is still lost, we share 50% of the loss with you.",
-  },
-  {
-    question: "Which breeds do you have?",
-    answer: "We usually have Makhi Cheena and Rajanpoori breeds, but can arrange others on request.",
-  },
-  {
-    question: "How do I book?",
-    answer: "Reach out on WhatsApp, choose the animal you like (or send us your own), and that's it — palai starts!",
-  },
-];
-
-export default function FaqAccordion() {
+export default function FaqAccordion({ items }: { items: FaqItem[] }) {
   const [open, setOpen] = useState<number>(0);
 
   return (
     <div className="flex flex-col gap-3">
-      {faqs.map((faq, i) => (
+      {items.map((faq, i) => (
         <div
           key={i}
           className="rounded-[16px] overflow-hidden"
@@ -54,8 +19,8 @@ export default function FaqAccordion() {
         >
           <button
             onClick={() => setOpen(open === i ? -1 : i)}
-            className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left cursor-pointer bg-transparent border-0"
-            style={{ fontFamily: "var(--font-sans)" }}
+            className="w-full flex items-center justify-between gap-4 px-6 py-5 text-start cursor-pointer bg-transparent border-0"
+            style={{ fontFamily: "inherit" }}
           >
             <span className="font-semibold text-[15px] leading-[1.35]" style={{ color: "#1a1916" }}>
               {faq.question}
@@ -74,7 +39,7 @@ export default function FaqAccordion() {
 
           <div
             style={{
-              maxHeight: open === i ? 260 : 0,
+              maxHeight: open === i ? 600 : 0,
               opacity: open === i ? 1 : 0,
               overflow: "hidden",
               transition: "max-height 0.4s cubic-bezier(.2,.7,.2,1), opacity 0.4s cubic-bezier(.2,.7,.2,1)",
