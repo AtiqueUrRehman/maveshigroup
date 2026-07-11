@@ -17,6 +17,9 @@ const LIGHT_CARE = 11000;
 const HEAVY_CARE = 14000;
 const HEAVY_MONTHS = 2; // last N months cost HEAVY_CARE
 
+// Compact form for tight mobile chips: 11000 → "11k", keeps full number otherwise.
+const shortAmount = (n: number) => (n % 1000 === 0 ? `${n / 1000}k` : n.toLocaleString());
+
 export default function PricingTimeline({
   beforeImage,
   afterImage,
@@ -325,7 +328,9 @@ export default function PricingTimeline({
                       transition: "background 0.25s ease, color 0.25s ease",
                     }}
                   >
-                    +Rs {amount.toLocaleString()}
+                    +Rs{" "}
+                    <span className="sm:hidden">{shortAmount(amount)}</span>
+                    <span className="hidden sm:inline">{amount.toLocaleString()}</span>
                   </div>
                 )}
               </div>
