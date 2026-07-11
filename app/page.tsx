@@ -323,7 +323,7 @@ export default function Home() {
 
       <Footer
         brand="maveshi"
-        tagline="From code to care, from livestock to legacy."
+        tagline="A legacy in the making"
         copyright="© 2026 Maveshi Farms"
       />
     </div>

@@ -28,7 +28,7 @@ const gulzar = Gulzar({
 });
 
 export const metadata: Metadata = {
-  title: "Maveshi Farms — From Code to Care",
+  title: "Maveshi Farms",
   description: "A computer scientist's journey to build a smarter, healthier future for goat farming.",
 };
 
