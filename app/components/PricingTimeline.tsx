@@ -396,6 +396,16 @@ export default function PricingTimeline({
           <div className="font-extrabold leading-tight mb-3" style={{ fontSize: "clamp(20px,2vw,26px)", color: "#2A5C35" }}>
             Rs 11,000–14,000 / mo
           </div>
+          <div className="flex flex-col gap-1.5 mb-3">
+            <div className="flex items-center justify-between gap-2 text-[13px]">
+              <span style={{ color: "#6b665c" }}>Under 70 kg</span>
+              <span className="font-semibold" style={{ color: "#1a1916" }}>Rs 11,000 / mo</span>
+            </div>
+            <div className="flex items-center justify-between gap-2 text-[13px]">
+              <span style={{ color: "#6b665c" }}>Over 70 kg</span>
+              <span className="font-semibold" style={{ color: "#1a1916" }}>Rs 14,000 / mo</span>
+            </div>
+          </div>
           <p className="text-[13px] leading-[1.6] m-0" style={{ color: "#6b665c" }}>
             Per goat, billed monthly until Eid. Covers feed, water, shelter, vaccinations and vet care.
           </p>
