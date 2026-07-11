@@ -24,6 +24,18 @@ const faqs: FaqItem[] = [
     question: "How is delivery handled before Eid?",
     answer: "We arrange delivery to your doorstep or nearest convenient location for a flat fee of Rs 5,000 or less, depending on your area. Delivery is scheduled in the final week before Eid so your goat arrives fresh and on time.",
   },
+  {
+    question: "What if my goat dies?",
+    answer: "We have qualified veterinary doctors on our team to handle any medical cases, backed by blood and fecal laboratory support. In the rare event the animal is still lost, we share 50% of the loss with you.",
+  },
+  {
+    question: "Which breeds do you have?",
+    answer: "We usually have Makhi Cheena and Rajanpoori breeds, but can arrange others on request.",
+  },
+  {
+    question: "How do I book?",
+    answer: "Reach out on WhatsApp, choose the animal you like (or send us your own), and that's it — palai starts!",
+  },
 ];
 
 export default function FaqAccordion() {
