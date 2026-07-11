@@ -53,9 +53,9 @@ const stats = [
 ];
 
 const businessChips = [
-  { initial: "M", name: "Maveshi Farms", href: "#" },
-  { initial: "A", name: "Alpha Farms", href: "/alpha-farms" },
-  { initial: "B", name: "Burraq Dairies", href: "/burraq-dairies" },
+  { initial: "M", name: "Maveshi Farms", href: "/", color: "#C5372C" },
+  { initial: "A", name: "Alpha Farms", href: "/alpha-farms", color: "#2A5C35" },
+  { initial: "B", name: "Burraq Dairies", href: "/burraq-dairies", color: "#1a1916" },
 ];
 
 export default function Home() {
@@ -309,12 +309,12 @@ export default function Home() {
               >
                 <span
                   className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-[13px] font-extrabold flex-shrink-0"
-                  style={{ background: "#C5372C" }}
+                  style={{ background: chip.color }}
                 >
                   {chip.initial}
                 </span>
                 {chip.name}
-                <span className="ml-auto" style={{ color: "#C5372C" }}>→</span>
+                <span className="ml-auto" style={{ color: chip.color }}>→</span>
               </Link>
             ))}
           </div>
